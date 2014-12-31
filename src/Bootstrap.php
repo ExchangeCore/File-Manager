@@ -11,7 +11,7 @@ class Bootstrap
         $coreConfig = include __DIR__ . '/config/main.php';
         $config = ArrayHelper::merge($coreConfig, $applicationConfig);
 
-        $application = new yii\web\Application($config);
+        $application = new Application($config);
         $application->run();
     }
 }
