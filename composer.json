@@ -11,7 +11,7 @@
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": "2.0.1",
-        "yiisoft/yii2-boostrap": "2.0.1",
+        "yiisoft/yii2-bootstrap": "2.0.1",
         "yiisoft/yii2-swiftmailer": "2.0.1",
         "bower-asset/jquery": "~1.11.1",
         "bower-asset/fontawesome": "~4.2.0",
