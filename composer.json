@@ -29,6 +29,6 @@
         }
     },
     "autoload": {
-        "psr-4": {"exchangecore\\file-manager\\": ""}
+        "psr-4": {"exchangecore\\filemanager\\": ""}
     }
 }
