@@ -8,11 +8,19 @@ use yii\base\InvalidConfigException;
 class Application extends \yii\web\Application
 {
     public $applicationControllerNamespace = 'application\controllers';
+    public $isInstalled;
 
     protected function bootstrap()
     {
-        //todo: installer stuff
+        if ($this->isInstalled === null && isset($this->components['db'])) {
+            $this->isInstalled = true;
+        } elseif (!isset($this->components['db'])) {
+            $this->isInstalled = false;
+        }
+
         parent::bootstrap();
+
+        $this->on(self::EVENT_BEFORE_ACTION, ['exchangecore\filemanager\events\InstallerCheck', 'check']);
     }
 
     /**
@@ -35,6 +43,7 @@ class Application extends \yii\web\Application
             return null;
         }
         $className = str_replace(' ', '', ucwords(str_replace('-', ' ', $className))) . 'Controller';
+
         $vendorClassName = ltrim($this->controllerNamespace . '\\' . str_replace('/', '\\', $prefix)  . $className, '\\');
         $applicationClassName = ltrim($this->applicationControllerNamespace . '\\' . str_replace('/', '\\', $prefix)  . $className, '\\');
         if (strpos($className, '-') !== false) {

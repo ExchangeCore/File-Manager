@@ -1,5 +1,5 @@
 <?php
-return [
+$config = [
     'aliases' => [
         '@core' => dirname(__DIR__)
     ],
@@ -18,9 +18,31 @@ return [
         'mail' => [
             'class' => 'yii\swiftmailer\Mailer',
             'viewPath' => '@app/mail'
+        ],
+        'i18n' => [
+            'translations' => [
+                'core*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'sourceLanguage' => '@core/messages',
+                    'fileMap' => [
+                        'core' => 'core.php'
+                    ]
+                ]
+            ]
         ]
     ],
     'params' => [
 
     ],
 ];
+
+
+
+if (YII_ENV_DEV) {
+    // configuration adjustments for 'dev' environment
+    $config['bootstrap'][] = 'debug';
+    $config['modules']['debug'] = 'yii\debug\Module';
+    $config['modules']['gii'] = 'yii\gii\Module';
+}
+
+return $config;
