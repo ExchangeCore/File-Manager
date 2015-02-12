@@ -17,7 +17,7 @@ $this->beginPage();
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?> | <?= Yii::t('core', 'File Manager Install') ?></title>
+    <title><?= Html::encode($this->title) ?> | <?= Yii::t('app', 'File Manager Install') ?></title>
     <?php $this->head() ?>
 </head>
 <body>
@@ -26,7 +26,7 @@ $this->beginPage();
 <nav class="navbar navbar-default">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#"><?= Yii::t('core', 'File Manager Install') ?></a>
+            <a class="navbar-brand" href="#"><?= Yii::t('app', 'File Manager Install') ?></a>
         </div>
     </div>
 </nav>

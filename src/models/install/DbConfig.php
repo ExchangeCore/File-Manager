@@ -35,18 +35,20 @@ class DbConfig extends Model
     public function attributeLabels()
     {
         return [
-            'type' => Yii::t('core', 'Connection Type'),
-            'host' => Yii::t('core', 'Host'),
-            'database' => Yii::t('core', 'Database Name'),
-            'username' => Yii::t('core', 'Username'),
-            'password' => Yii::t('core', 'Password'),
+            'type' => Yii::t('app', 'Connection Type'),
+            'host' => Yii::t('app', 'Host'),
+            'database' => Yii::t('app', 'Database Name'),
+            'username' => Yii::t('app', 'Username'),
+            'password' => Yii::t('app', 'Password'),
         ];
     }
 
     public function validateCanConnect()
     {
+
+
         if (!$this->hasErrors()) {
-            $db = new Connection($this->buildConnectionParams());
+            $db = $this->getConnection();
             try {
                 $db->open();
                 $db->close();
@@ -57,9 +59,10 @@ class DbConfig extends Model
         }
     }
     
-    public function buildConnectionParams()
+    public function getConfig()
     {
         $connectionParams = [];
+        $connectionParams['class'] = '\yii\db\Connection';
         if($pos = strpos($this->type, 'odbc') === 0) {
             $connectionParams['dsn'] = 'odbc:' . $this->host;
             $connectionParams['driverName'] = substr($this->type, 5);
@@ -71,5 +74,17 @@ class DbConfig extends Model
         $connectionParams['charset'] = 'utf8';
 
         return $connectionParams;
+    }
+
+    public function getConnectionConfig()
+    {
+        $config = $this->getConfig();
+        unset($config['class']);
+        return $config;
+    }
+
+    public function getConnection()
+    {
+        return new Connection($this->getConnectionConfig());
     }
 }

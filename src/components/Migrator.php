@@ -151,9 +151,9 @@ class Migrator extends \yii\base\component
 
         $n = count($migrations);
         if ($n === $total) {
-            $this->addMessage("Total $n new " . ($n === 1 ? 'migration' : 'migrations') . " to be applied:");
+            $this->addMessage("Total $n new " . ($n === 1 ? 'migration' : 'migrations') . " to be applied");
         } else {
-            $this->addMessage("Total $n out of $total new " . ($total === 1 ? 'migration' : 'migrations') . " to be applied:");
+            $this->addMessage("Total $n out of $total new " . ($total === 1 ? 'migration' : 'migrations') . " to be applied");
         }
 
         foreach ($migrations as $migration) {
@@ -219,7 +219,7 @@ class Migrator extends \yii\base\component
      *
      * @return bool Returns true if the upgrade was run successfully, false if there was an error
      */
-    public function actionRedo($limit = 1)
+    public function Redo($limit = 1)
     {
         if ($limit === 'all') {
             $limit = null;
@@ -460,7 +460,7 @@ class Migrator extends \yii\base\component
      * Returns the migrations that are not applied.
      * @return array list of new migrations
      */
-    protected function getNewMigrations()
+    public function getNewMigrations()
     {
         $applied = [];
         foreach ($this->getMigrationHistory(null) as $version => $time) {
@@ -500,7 +500,7 @@ class Migrator extends \yii\base\component
     /**
      * @inheritdoc
      */
-    protected function getMigrationHistory($limit)
+    public function getMigrationHistory($limit)
     {
         if(!$this->beforeMigration()) {
             return false;

@@ -8,16 +8,25 @@ use yii\base\InvalidConfigException;
 class Application extends \yii\web\Application
 {
     public $applicationControllerNamespace = 'application\controllers';
-    public $isInstalled;
+    public $isInstalled = true;
+
+    /**
+     * @inheritdoc
+     */
+    public function preInit(&$config)
+    {
+        if (!isset($config['basePath'])) {
+            $config['basePath'] = dirname($_SERVER['SCRIPT_FILENAME']) . '/application';
+            $config['components']['request']['enableCookieValidation'] = false;
+
+            $this->isInstalled = false;
+        }
+
+        parent::preInit($config);
+    }
 
     protected function bootstrap()
     {
-        if ($this->isInstalled === null && isset($this->components['db'])) {
-            $this->isInstalled = true;
-        } elseif (!isset($this->components['db'])) {
-            $this->isInstalled = true;
-        }
-
         parent::bootstrap();
 
         $this->on(self::EVENT_BEFORE_ACTION, ['exchangecore\filemanager\events\InstallerCheck', 'check']);

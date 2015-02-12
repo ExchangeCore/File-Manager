@@ -19,6 +19,7 @@ class InstallAsset extends AssetBundle
 
     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset'
+        'yii\bootstrap\BootstrapAsset',
+        'exchangecore\filemanager\assets\NProgressAsset'
     ];
 }
