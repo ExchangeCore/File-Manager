@@ -10,10 +10,10 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.4.0",
-        "yiisoft/yii2": "2.0.1",
-        "yiisoft/yii2-bootstrap": "2.0.1",
-        "yiisoft/yii2-swiftmailer": "2.0.1",
-        "bower-asset/jquery": "~1.11.1",
+        "yiisoft/yii2": "~2.0",
+        "yiisoft/yii2-bootstrap": "~2.0",
+        "yiisoft/yii2-swiftmailer": "~2.0",
+        "bower-asset/jquery": "~1.11",
         "bower-asset/fontawesome": "~4.2.0",
         "bower-asset/underscore": "~1.6.0",
         "bower-asset/nprogress": "~0.1.6"
