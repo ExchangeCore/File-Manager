@@ -11,7 +11,7 @@ use yii\helpers\Html;
 ?>
 
 <div class="page-header">
-    <h1><?= Yii::t('app', 'Applying Migrations') ?></h1>
+    <h1><?= Yii::t('core', 'Applying Migrations') ?></h1>
 </div>
 
 <?= Progress::widget(

@@ -35,11 +35,11 @@ class DbConfig extends Model
     public function attributeLabels()
     {
         return [
-            'type' => Yii::t('app', 'Connection Type'),
-            'host' => Yii::t('app', 'Host'),
-            'database' => Yii::t('app', 'Database Name'),
-            'username' => Yii::t('app', 'Username'),
-            'password' => Yii::t('app', 'Password'),
+            'type' => Yii::t('core', 'Connection Type'),
+            'host' => Yii::t('core', 'Host'),
+            'database' => Yii::t('core', 'Database Name'),
+            'username' => Yii::t('core', 'Username'),
+            'password' => Yii::t('core', 'Password'),
         ];
     }
 
@@ -54,7 +54,7 @@ class DbConfig extends Model
                 $db->close();
             } catch (Exception $e) {
                 $this->addError('host',
-                    Yii::t('app', 'The database connection is not valid: {error}', ['error' => $e->getMessage()]));
+                    Yii::t('core', 'The database connection is not valid: {error}', ['error' => $e->getMessage()]));
             }
         }
     }

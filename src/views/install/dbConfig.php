@@ -10,7 +10,7 @@ use yii\helpers\Html;
 ?>
 
 <div class="page-header">
-    <h1><?= Yii::t('app', 'Database Configuration') ?></h1>
+    <h1><?= Yii::t('core', 'Database Configuration') ?></h1>
 </div>
 
 <?php $form = ActiveForm::begin(['id' => 'database-config']); ?>
@@ -22,7 +22,7 @@ use yii\helpers\Html;
 <?= $form->field($model, 'password')->passwordInput() ?>
 
 <div class="form-group">
-    <?= Html::submitButton(Yii::t('app', 'Save Database Configuration'), ['class' => 'btn btn-primary']) ?>
+    <?= Html::submitButton(Yii::t('core', 'Save Database Configuration'), ['class' => 'btn btn-primary']) ?>
 </div>
 
 <?php ActiveForm::end() ?>

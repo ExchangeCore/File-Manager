@@ -5,7 +5,7 @@ jQuery(function($) {
 
     var pages = {
         databaseConfig: function() {
-            $installerFrame.load("/index.php?r=install%2Fdb-config")
+            $installerFrame.load("/index.php/install/db-config")
         }
     };
 

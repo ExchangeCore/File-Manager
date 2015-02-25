@@ -10,6 +10,7 @@ class m141231_000001_install extends \yii\db\Migration
             'User',
             [
                 'UserID' => Schema::TYPE_PK,
+                'AuthenticationKey' => Schema::TYPE_STRING,
                 'Name' => Schema::TYPE_STRING
             ]
         );
@@ -79,6 +80,7 @@ class m141231_000001_install extends \yii\db\Migration
                 'UsersLocalID' => Schema::TYPE_PK,
                 'Username' => Schema::TYPE_STRING,
                 'Password' => Schema::TYPE_STRING,
+                'AuthenticationKey' => Schema::TYPE_STRING,
                 'LastPasswordChangeDateTime' => Schema::TYPE_DATETIME,
             ]
         );
