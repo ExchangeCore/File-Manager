@@ -14,15 +14,21 @@ class LocalLoginForm extends Model
 
     protected $user;
 
-    /**
-     * @inheritdoc
-     */
     public function rules()
     {
         return [
             [['username', 'password'], 'required'],
             ['password', 'validatePassword'],
             ['rememberMe', 'boolean'],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'username' => Yii::t('core', 'Username'),
+            'password' => Yii::t('core', 'Password'),
+            'rememberMe', Yii::t('core', 'Remember Me'),
         ];
     }
 
@@ -37,7 +43,7 @@ class LocalLoginForm extends Model
     {
         if (!$this->hasErrors()) {
             $user = $this->getAuthenticationAccount();
-            if (!$user || !$user->validatePassword($this->password)) {
+            if (!$user || !$user->validatePassword($this->$attribute)) {
                 $this->addError($attribute, 'Incorrect username or password.');
             }
         }
