@@ -87,6 +87,7 @@ class InstallController extends Controller
     {
         $migrator = new Migrator();
         $migrator->migrateTo($migrator::BASE_MIGRATION);
+        Yii::$app->response->headers->add('X-Install-Load', URL::to(['install/db-config']));
 
         $this->renderPartial('rollback');
     }

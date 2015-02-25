@@ -8,13 +8,12 @@ use exchangecore\filemanager\models\authentication\AuthenticationType;
 
 class AuthenticationController extends Controller
 {
-    public function actionIndex()
+    public $defaultAction = 'login';
+
+    public function actionLogin()
     {
-        $authTypes = AuthenticationType::findEnabledAuthenticationTypes();
-        if(count($authTypes) == 1) {
-            $this->redirect(['authentication' . $authTypes[0]->Handle . '/login']);
-        }
-        return $this->render('index');
+        $authTypes = AuthenticationType::findDefaultAuthenticationType();
+        $this->redirect(['authentication-' . strtolower($authTypes->Handle) . '/login']);
     }
 
     public function actionLogout()

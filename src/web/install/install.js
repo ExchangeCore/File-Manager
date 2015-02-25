@@ -35,7 +35,7 @@ jQuery(function($) {
         return false;
     });
 
-    window.beforeunload = function() {
+    window.onbeforeunload = function() {
         return "Are you sure you want to leave this page?" + (ajaxRunning > 0 ? " The installer is currently running in the background. If you leave now you will break your installation." : "");
     };
 

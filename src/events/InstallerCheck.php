@@ -9,8 +9,12 @@ class InstallerCheck
      */
     public static function check($event)
     {
+        $allowedControllers = [
+            'exchangecore\\filemanager\\controllers\\InstallController',
+            'yii\\debug\\controllers\\DefaultController',
+        ];
         if (\Yii::$app->isInstalled === false &&
-            \Yii::$app->controller->className() !== 'exchangecore\filemanager\controllers\InstallController') {
+            !in_array(\Yii::$app->controller->className(), $allowedControllers)) {
             \Yii::$app->response->redirect(['install/index']);
         }
     }

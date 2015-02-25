@@ -10,13 +10,6 @@ use exchangecore\filemanager\models\authentication\UserAuthenticationType;
  */
 abstract class BaseType extends ActiveRecord
 {
-
-    /**
-     * @param array $authInfo An associative array of authentication information used for
-     * @return
-     */
-    abstract public function authenticate($authInfo);
-
     /**
      * @return User
      */

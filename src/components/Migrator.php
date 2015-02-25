@@ -269,7 +269,7 @@ class Migrator extends \yii\base\component
      * that the application should be migrated to. This can be either the timestamp,
      * the full name of the migration, the UNIX timestamp, or the parseable datetime
      * string.
-     * @return int
+     * @return bool
      * @throws Exception if the version argument is invalid.
      */
     public function migrateTo($version)

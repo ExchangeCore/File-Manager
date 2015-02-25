@@ -32,9 +32,10 @@ class AuthenticationType extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['Name','Handle'], 'string', 'max' => 255],
             [['Description'], 'string'],
-            [['IsEnabled', 'Order'], 'integer'],
-            [['Name'], 'string', 'max' => 255],
+            [['Order'], 'integer'],
+            [['IsEnabled'], 'boolean'],
 
             [['Name','Handle','IsEnabled'], 'required'],
         ];
@@ -48,6 +49,7 @@ class AuthenticationType extends \yii\db\ActiveRecord
         return [
             'AuthenticationTypeID' => Yii::t('core', 'Authentication Type ID'),
             'Name' => Yii::t('core', 'Name'),
+            'Handle' => Yii::t('core', 'Handle'),
             'Description' => Yii::t('core', 'Description'),
             'IsEnabled' => Yii::t('core', 'Is Enabled'),
             'Order' => Yii::t('core', 'Order'),
@@ -63,6 +65,14 @@ class AuthenticationType extends \yii\db\ActiveRecord
             ->where('IsEnabled = 1')
             ->orderBy('Order')
             ->all();
+    }
+
+    public static function findDefaultAuthenticationType()
+    {
+        return self::find()
+            ->where('IsEnabled = 1')
+            ->orderBy('Order')
+            ->one();
     }
 
     /**

@@ -46,4 +46,14 @@ class Local extends BaseType
             'LastPasswordChangeDateTime' => Yii::t('core', 'Last Password Change Date Time'),
         ];
     }
+
+    public function validatePassword($password)
+    {
+        return Yii::$app->getSecurity()->validatePassword($password, $this->Password);
+    }
+
+    public static function findByUsername($username)
+    {
+        return self::find()->where('Username = :username', [':username' => $username])->one();
+    }
 }
