@@ -12,7 +12,11 @@ use exchangecore\filemanager\models\authentication\UserAuthenticationType;
  *
  * @property integer $UserID
  * @property string $AuthenticationKey
- * @property string $Name
+ * @property string $LastAuthenticatedDateTime
+ * @property string $UserName
+ * @property string $FirstName
+ * @property string $LastName
+ * @property string $CreatedDateTime
  *
  * @property UserAuthenticationType[] $userAuthenticationTypes
  * @property UserGroup[] $userGroups
@@ -33,7 +37,10 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['Name', 'AuthenticationKey'], 'string', 'max' => 255]
+            [['Username'], 'string', 'max' => 30],
+            [['FirstName', 'LastName'], 'string', 'max' => 255],
+
+            [['Username'], 'required', 'message' => Yii::t('core', 'Please choose a username.')],
         ];
     }
 
@@ -45,7 +52,12 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return [
             'UserID' => Yii::t('core', 'User ID'),
             'AuthenticationKey' => Yii::t('core', 'Authentication Key'),
-            'Name' => Yii::t('core', 'Name'),
+            'LastAuthenticatedDateTime' => Yii::t('core', 'Last Authenticated'),
+            'Username' => Yii::t('core', 'Username'),
+            'FirstName' => Yii::t('core', 'First Name'),
+            'LastName' => Yii::t('core', 'Last Name'),
+            'Email' => Yii::t('core', 'Email'),
+            'CreatedDateTime' => Yii::t('core', 'Account Created'),
         ];
     }
 

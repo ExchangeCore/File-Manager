@@ -9,6 +9,7 @@ use Yii;
  *
  * @property integer $AuthenticationTypeID
  * @property string $Name
+ * @property string $Handle
  * @property string $Description
  * @property integer $IsEnabled
  * @property integer $Order
@@ -33,7 +34,9 @@ class AuthenticationType extends \yii\db\ActiveRecord
         return [
             [['Description'], 'string'],
             [['IsEnabled', 'Order'], 'integer'],
-            [['Name'], 'string', 'max' => 255]
+            [['Name'], 'string', 'max' => 255],
+
+            [['Name','Handle','IsEnabled'], 'required'],
         ];
     }
 
@@ -49,6 +52,17 @@ class AuthenticationType extends \yii\db\ActiveRecord
             'IsEnabled' => Yii::t('core', 'Is Enabled'),
             'Order' => Yii::t('core', 'Order'),
         ];
+    }
+
+    /**
+     * @return self[]
+     */
+    public static function findEnabledAuthenticationTypes()
+    {
+        return self::find()
+            ->where('IsEnabled = 1')
+            ->orderBy('Order')
+            ->all();
     }
 
     /**

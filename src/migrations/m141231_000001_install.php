@@ -11,9 +11,16 @@ class m141231_000001_install extends \yii\db\Migration
             [
                 'UserID' => Schema::TYPE_PK,
                 'AuthenticationKey' => Schema::TYPE_STRING,
-                'Name' => Schema::TYPE_STRING
+                'LastAuthenticatedDateTime' => Schema::TYPE_DATETIME,
+                'Username' => Schema::TYPE_STRING,
+                'FirstName' => Schema::TYPE_STRING,
+                'LastName' => Schema::TYPE_STRING,
+                'PrimaryEmail' => Schema::TYPE_STRING,
+                'CreatedDateTime' => Schema::TYPE_DATETIME,
             ]
         );
+
+        $this->createIndex('Username', 'User', 'Username', true);
 
         $this->createTable(
             'AuthenticationType',
@@ -30,11 +37,16 @@ class m141231_000001_install extends \yii\db\Migration
             'AuthenticationType',
             [
                 'Name' => 'Local',
-                'Description' => 'The local database authentication method',
-                'IsEnabled' => true,
+                'Handle' => 'Local',
+                'Description' => 'The local database password authentication method',
+                'IsEnabled' => 1,
                 'Order' => 0,
             ]
         );
+
+        $this->createIndex('Handle', 'AuthenticationType', 'Handle', true);
+        $this->createIndex('Order', 'AuthenticationType', ['IsEnabled', 'Order'], false);
+
 
         $this->createTable(
             'UserAuthenticationType',
@@ -68,7 +80,7 @@ class m141231_000001_install extends \yii\db\Migration
         );
 
         $this->createIndex(
-            'UserAuthenticationTypeUserID',
+            'AuthenticationTypeUserID',
             'UserAuthenticationType',
             'AuthenticationTypeUserID',
             false
@@ -95,14 +107,7 @@ class m141231_000001_install extends \yii\db\Migration
             ]
         );
 
-        $this->createIndex(
-            'GroupName',
-            'Group',
-            [
-                'Name'
-            ],
-            true
-        );
+        $this->createIndex('Name', 'Group', 'Name', true);
 
         $this->insert(
             'Group',
