@@ -23,6 +23,8 @@ use exchangecore\filemanager\models\authentication\UserAuthenticationType;
  */
 class User extends \yii\db\ActiveRecord implements IdentityInterface
 {
+    public $currentAuthUser;
+
     /**
      * @inheritdoc
      */
@@ -116,5 +118,22 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function validateAuthKey($authKey)
     {
         return $this->getAuthKey() !== null && $this->getAuthKey() === $authKey;
+    }
+
+    /**
+     * @return null|UserAuthenticationType
+     */
+    public function getCurrentAuthUser()
+    {
+        return $this->currentAuthUser;
+    }
+
+    /**
+     * Sets the current identity's authentication user so we can use it later if needed
+     * @param UserAuthenticationType $authType
+     */
+    public function setCurrentAuthUser(UserAuthenticationType $authType)
+    {
+        $this->currentAuthUser = $authType;
     }
 }

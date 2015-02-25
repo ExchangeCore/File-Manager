@@ -15,13 +15,13 @@ abstract class BaseType extends ActiveRecord
      */
     public function getUser()
     {
-        $this->hasOne(User::className(), ['UserID' => 'UserID'])
+        return $this->hasOne(User::className(), ['UserID' => 'UserID'])
             ->viaTable(UserAuthenticationType::className(), ['AuthenticationTypeUserID' => 'AuthenticationTypeUserID']);
     }
 
     public function getUserAuthentication()
     {
-        $this->hasOne(UserAuthenticationType::className(), ['AuthenticationTypeUserID' => 'AuthenticationTypeUserID'])
+        return $this->hasOne(UserAuthenticationType::className(), ['AuthenticationTypeUserID' => 'AuthenticationTypeUserID'])
             ->inverseOf('authentication');
     }
 } 

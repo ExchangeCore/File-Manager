@@ -36,7 +36,7 @@ class LocalLoginForm extends Model
     public function validatePassword($attribute, $params)
     {
         if (!$this->hasErrors()) {
-            $user = $this->getUser();
+            $user = $this->getAuthenticationAccount();
             if (!$user || !$user->validatePassword($this->password)) {
                 $this->addError($attribute, 'Incorrect username or password.');
             }
@@ -50,7 +50,8 @@ class LocalLoginForm extends Model
     public function login()
     {
         if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser()->getUser(), $this->rememberMe ? 3600*24*30 : 0);
+            $this->getAuthenticationAccount()->getUser()->currentAuthUser = $this->getAuthenticationAccount();
+            return Yii::$app->user->login($this->getAuthenticationAccount()->getUser(), $this->rememberMe ? 3600*24*30 : 0);
         } else {
             return false;
         }
@@ -61,7 +62,7 @@ class LocalLoginForm extends Model
      *
      * @return Local|null
      */
-    public function getUser()
+    public function getAuthenticationAccount()
     {
         if ($this->user === false) {
             $this->user = Local::findByUsername($this->username);
